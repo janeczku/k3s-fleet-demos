@@ -24,8 +24,8 @@ spec:
           env:
             - name: COW_COLOR
               value: purple
-			- name: VERSION
-			  value: 1.0.5
+            - name: VERSION
+              value: 1.0.5
           readinessProbe:
             httpGet:
               port: web
