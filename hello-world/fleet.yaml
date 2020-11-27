@@ -1,0 +1,6 @@
+targetCustomizations:
+  - name: colorize
+    yaml:
+      overlays:
+        - green-color
+    clusterGroup: green-edge
