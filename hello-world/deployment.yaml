@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: hello-world
-          image: janeczku/rancher-demo:v0.1.1
+          image: bashofmann/rancher-demo:1.0.0
           imagePullPolicy: Always
           ports:
           - containerPort: 8080
