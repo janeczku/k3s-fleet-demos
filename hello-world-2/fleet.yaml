@@ -4,11 +4,6 @@
 # if not specified the chart will be installed to "default"
 namespace: helloworld
 
-# Custom helm options
-helm:
-  values:
-    msg: "Ciao Tacco"
-
 targetCustomizations:
 - name: rsu
   clusterSelector:
