@@ -32,8 +32,8 @@ helm:
     strategyType: Recreate
     auth:
       enabled: true
-      persistence:
-        enabled: false
+    persistence:
+      enabled: false
 
 #targetCustomizations:
 #- name: rsu
