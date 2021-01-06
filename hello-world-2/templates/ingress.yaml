@@ -6,11 +6,7 @@
 {{- if $ingress.enabled -}}
 {{- $fullName := include "DotNetCoreDocker.fullname" . -}}
 {{- $svcHttpPort := .Values.service.httpPort -}}
-{{- if semverCompare ">=1.14-0" .Capabilities.KubeVersion.GitVersion -}}
-apiVersion: networking.k8s.io/v1beta1
-{{- else -}}
-apiVersion: extensions/v1beta1
-{{- end }}
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ $fullName }}
@@ -35,8 +31,10 @@ spec:
     http:
       paths:      
       - path: {{ $baseUrl }}(.*)(/|$)
+        pathType: Prefix
         backend:
-          serviceName: {{ $fullName }}
-          servicePort: {{ $svcHttpPort }}        
-      
+          service:
+            name: {{ $fullName }}
+            port:
+              number: {{ $svcHttpPort }}
 {{- end }}
