@@ -1,0 +1,42 @@
+{{- $ingress    := .Values.ingress -}}
+{{- $issuer     := .Values.certificateIssuer -}}
+{{- $clusterUrl := .Values.clusterUrl -}}
+{{- $baseUrl    := .Values.baseUrl -}}
+
+{{- if $ingress.enabled -}}
+{{- $fullName := include "DotNetCoreDocker.fullname" . -}}
+{{- $svcHttpPort := .Values.service.httpPort -}}
+{{- if semverCompare ">=1.14-0" .Capabilities.KubeVersion.GitVersion -}}
+apiVersion: networking.k8s.io/v1beta1
+{{- else -}}
+apiVersion: extensions/v1beta1
+{{- end }}
+kind: Ingress
+metadata:
+  name: {{ $fullName }}
+  {{- with $ingress.annotations }}
+  annotations:
+    {{- range $key, $value := . }}
+    {{- printf "%s: %s" $key (tpl $value $ | quote) | nindent 4 }}
+    {{- end }}
+    {{- if $issuer.enabled }}
+    cert-manager.io/cluster-issuer: {{ $issuer.name }}
+    {{- end }}
+  {{- end }}
+  labels:
+    {{- include "DotNetCoreDocker.labels" . | nindent 4 }}
+spec:  
+  tls:   
+    - hosts:
+        - {{ $clusterUrl | replace "https://" "" }}
+      secretName: {{ $ingress.tlsSecretName}}  
+  rules:
+  - host: {{ $clusterUrl | replace "https://" "" }} 
+    http:
+      paths:      
+      - path: {{ $baseUrl }}(.*)(/|$)
+        backend:
+          serviceName: {{ $fullName }}
+          servicePort: {{ $svcHttpPort }}        
+      
+{{- end }}
