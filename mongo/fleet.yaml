@@ -28,8 +28,9 @@ helm:
   timeoutSeconds: 0
 
   # Custom values that will be passed as values.yaml to the installation
-#  values:
-#    msg: "Ciao Tacco"
+  values:
+    auth:
+      enabled: false
 
 #targetCustomizations:
 #- name: rsu
