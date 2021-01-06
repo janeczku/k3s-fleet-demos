@@ -30,7 +30,7 @@ helm:
   # Custom values that will be passed as values.yaml to the installation
   values:
     auth:
-      enabled: true
+      enabled: false
       persistence:
         enabled: false
 
