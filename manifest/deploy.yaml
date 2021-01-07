@@ -17,4 +17,4 @@ spec:
         podAntiAffinity:
       containers:
         - name: baz
-          image: foo/bar
+          image: busybox
