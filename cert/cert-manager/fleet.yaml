@@ -31,15 +31,6 @@ diff:
       - {"op": "remove", "path": "/webhooks/0/rules/0/resources"}
     - apiVersion: rbac.authorization.k8s.io/v1
       kind: RoleBinding
-      name: cert-manager-webhook:dynamic-serving
-      namespace: cert-manager
-      operations:
-      - {"op": "remove", "path": "/subjects/0/apiGroup"}
-      - {"op": "remove", "path": "/subjects/0/kind"}
-      - {"op": "remove", "path": "/subjects/0"}
-      - {"op": "remove", "path": "/subjects/0/namespace"}
-    - apiVersion: rbac.authorization.k8s.io/v1
-      kind: RoleBinding
       name: cert-manager:leaderelection
       namespace: kube-system
       operations:
@@ -49,8 +40,8 @@ diff:
       - {"op": "remove", "path": "/subjects/0/namespace"}
     - apiVersion: rbac.authorization.k8s.io/v1
       kind: RoleBinding
-      name: containers-cert-manager-webhook:dynamic-serving
+      name: cert-manager-webhook:dynamic-serving
       namespace: cert-manager
       operations:
         - op: remove
-          path: /subjects/0
+          path: /subjects
