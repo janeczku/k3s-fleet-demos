@@ -47,3 +47,13 @@ diff:
       - {"op": "remove", "path": "/subjects/0/kind"}
       - {"op": "remove", "path": "/subjects/0"}
       - {"op": "remove", "path": "/subjects/0/namespace"}
+    - apiVersion: v1
+      kind: ServiceAccount
+      name: cert-manager-webhook
+      namespace: cert-manager
+      operations:
+      - {"op": "remove", "path": "/subjects/0/apiGroup"}
+      - {"op": "remove", "path": "/subjects/0/kind"}
+      - {"op": "remove", "path": "/subjects/0"}
+      - {"op": "remove", "path": "/subjects/0/namespace"}
+      
