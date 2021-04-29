@@ -1,10 +1,13 @@
-defaultNamespace: netdata
+namespace: guestbook
 
 helm:
-  chart: github.com/netdata/helmchart/charts/netdata
-  releaseName: netdata
-  values:
-    service:
-      type: NodePort
-    ingress:
-      enabled: false
+  chart: https://github.com/janeczku/k3s-fleet-demos/releases/download/0.0.1/guestbook-0.0.0.tgz
+  releaseName: guestbook
+
+targetCustomizations:
+  - name: colorize
+    helm:
+      chart: https://github.com/janeczku/k3s-fleet-demos/releases/download/0.0.1/guestbook-0.0.1.tgz
+    clusterSelector:
+      matchLabels:
+        color: green
