@@ -3,6 +3,8 @@ namespace: guestbook
 helm:
   chart: https://github.com/janeczku/k3s-fleet-demos/releases/download/0.0.1/guestbook-0.0.0.tgz
   releaseName: guestbook
+  values:
+    machineModel: global.fleet.clusterLabels.machineModel
 
 targetCustomizations:
   - name: colorize
